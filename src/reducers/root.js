@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux'
 
 import gameStatus from './gameStatus'
-// import keyboard from './keyboard'
+import bonus from './bonus'
+import well from './well'
 
 const root = combineReducers({
   gameStatus,
-  // keyboard,
+  bonus,
+  well,
 })
 
 export default root

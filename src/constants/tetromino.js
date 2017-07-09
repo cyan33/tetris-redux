@@ -1,3 +1,4 @@
+export const TETROMINOS = ['I', 'O', 'T', 'J', 'L', 'S', 'Z']
 export const COLORS = {
   I: '#3cc7d6',
   O: '#fbb414',
