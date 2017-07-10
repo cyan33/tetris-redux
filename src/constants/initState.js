@@ -5,18 +5,21 @@ import { generateEmptyWellGrid, getRandomTetrimino } from '../utils'
 
 export const newGame = {
   gameStatus: STOPPED,
-  bonus: {
-    score: 0,
-    linesCleared: 0
-  },
-  well: {
-    // grid: generateEmptyWellGrid(),
-    // currTetrimino: getRandomTetrimino(),
-    // currTetriGrid: ,
-    // currTetriPosition:
-  },
-  dropOptions: {
-    dropFrames: 48,
-    isAccelerating: false
-  }
+  score: 0,
+  linesCleared: 0
+  // grid: generateEmptyWellGrid(),
+  // nextTetromino: 'I',
+  // currTetromino: getRandomTetrimino(),
+  // currTetroGrid: [
+  //   [ 0, 0, 0, 0 ],
+  //   [ 1, 1, 1, 1 ],
+  //   [ 0, 0, 0, 0 ],
+  //   [ 0, 0, 0, 0 ]
+  // ],
+  // currTetroPosition: {
+  //   "x": 3,
+  //   "y": 6
+  // },
+  // dropFrames: 48,
+  // isAccelerating: false
 }

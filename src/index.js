@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 
 import App from './App'
+import { fuck } from './__test__'
 import './index.css';
 
 const rootStore = createStore(
@@ -16,6 +17,7 @@ const rootStore = createStore(
 
 // DEBUG
 window.root = rootStore
+window.fuck = fuck
 
 ReactDOM.render(
   <Provider store={rootStore}>

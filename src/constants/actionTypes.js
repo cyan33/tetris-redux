@@ -6,16 +6,18 @@ export const GAME_RESUME = 'GAME_RESUME'
 
 // bonus
 export const GAIN_SCORE = 'GAIN_SCORE'
-export const LINE_CLEARED = 'LINE_CLEARED'
+export const CLEAR_LINE = 'CLEAR_LINE'
 
 // movement
-export const LEFT = 'LEFT'
+export const MOVE = 'MOVE'  // HORIZONTAL MOVE
 export const ROTATE = 'ROTATE'  // UP
-export const RIGHT = 'RIGHT'
 export const DROP = 'DROP'
 export const ACCELERATE = 'ACCELERATE' // DOWN
 
-export const TETRIMINO_LAND = 'TETRIMINO_LAND'
+export const DROPFRAME_INC = 'DROPFRAME_INC'
+export const DROPFRAME_DEC = 'DROPFRAME_DEC'
+
+export const TETROMINO_LAND = 'TETROMINO_LAND'
 
 // options
 

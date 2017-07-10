@@ -1,7 +1,8 @@
 import _ from 'lodash'
 
-import { WELL_COL, WELL_ROW } from '../constants/options'
-import { TETROMINOS } from '../constants/tetrominos'
+import { PLAYING, STOPPED } from '../constants/gameStatus'
+import { WELL_COL, WELL_ROW, DROP_FRAMES_DEFAULT } from '../constants/options'
+import { TETROMINOS, SHAPES } from '../constants/tetromino'
 
 export function generateEmptyWellGrid(row = WELL_ROW, col = WELL_COL) {
   return _.times(row, () => {
@@ -9,11 +10,138 @@ export function generateEmptyWellGrid(row = WELL_ROW, col = WELL_COL) {
   })
 }
 
-export function getRandomTetrimino() {
+export function getRandomTetromino() {
   const rand = Math.floor(Math.random() * TETROMINOS.length)
   return TETROMINOS[rand]
 }
 
+export function generateInitState(isPlaying = false) {
+  const hasntStartedState = {
+    gameStatus: STOPPED,
+    score: 0,
+    linesCleared: 0
+  }
+
+  const currTetromino = getRandomTetromino()
+  const currTetroGrid = SHAPES[currTetromino]
+
+  return isPlaying === false ?
+    hasntStartedState : _.merge({}, hasntStartedState, {
+      gameStatus: PLAYING,
+      grid: generateEmptyWellGrid(),
+      nextTetomino: getRandomTetromino(),
+      currTetromino,
+      currTetroGrid,
+      currTetroPosition: getInitTetroPosition(currTetroGrid),
+      dropFrames: DROP_FRAMES_DEFAULT,
+      isAccelerating: false
+    })
+}
+
 export function createEmptyLine(col = WELL_COL) {
   return _.times(col, () => null)
+}
+
+// todo: the init 'y' should be calculated with the 
+// current position of the tetromino of different shapes(rotate)
+export function getInitTetroPosition(currTetroGrid, col = WELL_COL) {
+  return {
+    // 'x' is the left-top point of the shape
+    // to make it align center, we also need to minus half width of the tetromino
+    x: Math.floor(col / 2) - Math.floor(currTetroGrid[0].length / 2), 
+    y: -2
+  }
+}
+
+export function isPositionAvailable(grid, currTetroGrid, newPosition) {
+  // determine whether if the tetromino crosses the wall
+  // or overlaps others
+
+  // currTetroGrid: [
+  //   [1, 1],
+  //   [1, 1]
+  // ]
+  // newPosition: {
+  //   x: 11,
+  //   y: 6
+  // }
+
+  // note that the single block is at the right bottom side of (x,y)
+  // which is why we use '>' and sometimes '>=' instead
+
+  const wellRow = grid.length
+  const wellCol = grid[0].length
+  const tetroRow = currTetroGrid.length
+  const tetroCol = currTetroGrid[0].length
+
+  let relativeX
+  let relativeY
+
+  for (let row = 0; row < tetroRow; row++) {
+    for (let col = 0; col < tetroCol; col++) {
+      // skip this loop if the current block is blank
+      if (!currTetroGrid[row][col]) continue
+      relativeX = newPosition.x + col
+      relativeY = newPosition.y + row
+
+      // boundary check
+      if (relativeX < 0 || relativeX >= wellCol || relativeY >= wellRow) {
+        console.info('STOP!! CROSSING THE BOUNDARY!!')
+        return false
+      }
+
+      // overlap check
+      if (relativeY >= 0 && grid[relativeX][relativeY]) {
+        console.info('THE GRID IS ALREADY OCCUPIED!!')
+        return false
+      }
+    }
+  }
+  return true
+}
+
+export function rotate(currTetroGrid) {
+  // rotate 90 degree clockwise: https://stackoverflow.com/questions/42519/how-do-you-rotate-a-two-dimensional-array
+  // 1. transpose 2. reverse each row
+  const rows = currTetroGrid.length
+  const cols = currTetroGrid[0].length
+
+  let grid = _.times(cols, () => [])
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      grid[col][row] = currTetroGrid[row][col]
+    }
+  }
+  return grid.map(r => r.reverse())
+}
+
+export function fitTetrominoWithinBoundaries(
+  grid,
+  tetrominoGrid,
+  { x, y }
+) {
+  // adjust the horizontal position of the tetromino if the rotation makes it out of the boundary
+  const cols = grid[0].length
+  let relativeX
+  let newX = x
+
+  for (let row = 0; row < tetrominoGrid.length; row++) {
+    for (let col = 0; col < tetrominoGrid[0].length; col++) {
+      if (!tetrominoGrid[row][col]) continue
+      relativeX = newX + col
+
+      // todo: I dont think the tetro is able to cross the left boundary?? 
+
+      // if (relativeX < 0) {
+      //   // newX = 0
+      //   newX++
+      // } 
+      if (relativeX >= cols) {
+        // newX -= relativeX - cols + 1
+        newX--
+      }
+    }
+  }
+
+  return { x: newX, y }
 }

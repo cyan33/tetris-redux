@@ -1,31 +1,28 @@
-import { LEFT, RIGHT, ACCELERATE, DROP, ROTATE } from '../constants/actionTypes'
+import { MOVE, ACCELERATE, DROP, ROTATE } from '../constants/actionTypes'
 
-export const moveLeft = () => {
+export const move = (direction) => {
+  // 1: right
+  // -1: left
   return {
-    TYPE: LEFT
-  }
-}
-
-export const moveRight = () => {
-  return {
-    TYPE: RIGHT
+    type: MOVE,
+    payload: direction
   }
 }
 
 export const drop = () => {
   return {
-    TYPE: DROP
+    type: DROP
   }
 }
 
 export const accelerate = () => {
   return {
-    TYPE: ACCELERATE
+    type: ACCELERATE
   }
 }
 
 export const rotate = () => {
   return {
-    TYPE: ROTATE
+    type: ROTATE
   }
 }
