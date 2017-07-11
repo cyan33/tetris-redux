@@ -145,3 +145,38 @@ export function fitTetrominoWithinBoundaries(
 
   return { x: newX, y }
 }
+
+export function hasLineToClear(grid) {
+  return grid.some(row => {
+    return row.every(el => el !== null)
+  })
+}
+
+export function clearLines(grid) {
+  const emptyRow = _.times(grid[0].length, () => null)
+  
+  return grid.reduce((result, row) => {
+    if (!row.every(el => el !== null)) {
+      result.push(row)
+    } else {
+      result.unshift(emptyRow)
+    }
+    return result
+  }, [])
+}
+
+export function transferTetroGridIntoWell({ grid, tetroGrid, tetroPosition, color }) {
+  let newGrid = [...grid]
+  let relativeX, relativeY
+
+  for (let row = 0; row < tetroGrid.length; row++) {
+    for (let col = 0; col < tetroGrid[0].length; col++) {
+      if (!!tetroGrid[row][col]) continue
+      relativeX = tetroPosition.x + row
+      relativeY = tetroPosition.y + col
+
+      newGrid[relativeX][relativeY] = color
+    }
+  }
+  return newGrid
+}

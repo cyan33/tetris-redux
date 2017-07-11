@@ -9,14 +9,16 @@ import { PLAYING, PAUSING, STOPPED } from '../constants/gameStatus'
 import { 
   getRandomTetromino, generateEmptyWellGrid, getInitTetroPosition,
   isPositionAvailable, rotate, fitTetrominoWithinBoundaries,
-  generateInitState
+  generateInitState, hasLineToClear, clearLines,
+  transferTetroGridIntoWell
 } from '../utils'
-import { SHAPES } from '../constants/tetromino'
+import { SHAPES, COLORS } from '../constants/tetromino'
 
 export default function root(state = {}, action) {
   let {
     gameStatus,
-    bonus,
+    score,
+    linesCleared,
     grid,
     nextTetromino,
     currTetroGrid,
@@ -58,6 +60,30 @@ export default function root(state = {}, action) {
         currTetroPosition: newPosition
       })
     case DROP:
+      // get the newPosition 
+      newPosition = _.merge({}, currTetroPosition, {
+        y: currTetroPosition + 1
+      })
+
+      // drop until it hits something
+      if (isPositionAvailable(grid, currTetroGrid, newPosition)) {
+        return _.merge({}, state, { currTetroPosition: newPosition })
+      }
+      
+      // position is not available => reaches the bottom-most position of the well
+      const newGrid = transferTetroGridIntoWell()
+
+      if (hasLineToClear(newGrid)) {
+        // return _.merge({}, state, {
+        //   score: score + 10,
+        //   linesCleared: linesCleared + 1,
+        //   grid: clearLines(grid),
+        //   currTetromino: nextTetromino,
+        //   currTetroGrid: SHAPES[nextTetromino],
+        //   currTetroPosition: getInitTetroPosition(nextTetromino),
+        //   dropFrames: dropFrames + 1
+        // })
+      }
 
     case TETROMINO_LAND:
     case CLEAR_LINE:

@@ -12,7 +12,8 @@ export const CLEAR_LINE = 'CLEAR_LINE'
 export const MOVE = 'MOVE'  // HORIZONTAL MOVE
 export const ROTATE = 'ROTATE'  // UP
 export const DROP = 'DROP'
-export const ACCELERATE = 'ACCELERATE' // DOWN
+export const ENABLE_ACCELERATE = 'ACCELERATE' // DOWN
+export const DISABLE_ACCELERATE = 'DISABLE_ACCELERATE'
 
 export const DROPFRAME_INC = 'DROPFRAME_INC'
 export const DROPFRAME_DEC = 'DROPFRAME_DEC'
