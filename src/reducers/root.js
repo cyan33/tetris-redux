@@ -1,12 +1,13 @@
 import _ from 'lodash'
 import {
-  GAME_START, GAME_PAUSE, GAME_RESUME, GAME_STOP,
+  GAME_INIT, GAME_START, GAME_PAUSE, GAME_RESUME, GAME_STOP,
   CLEAR_LINE, TETROMINO_LAND,
-  MOVE, ROTATE, DROP
+  MOVE, ROTATE, DROP,
+  ENABLE_ACCELERATE, DISABLE_ACCELERATE
 } from '../constants/actionTypes'
 import { PLAYING, PAUSING, STOPPED } from '../constants/gameStatus'
 
-import { 
+import {
   getRandomTetromino, generateEmptyWellGrid, getInitTetroPosition,
   isPositionAvailable, rotate, fitTetrominoWithinBoundaries,
   generateInitState, hasLineToClear, clearLines,
@@ -24,6 +25,8 @@ export default function root(state = {}, action) {
     currTetroGrid,
     currTetromino,
     currTetroPosition,
+    dropFrames,
+    isAccelerating
   } = state
 
   let newPosition
@@ -31,6 +34,8 @@ export default function root(state = {}, action) {
   switch(action.type) {
     // the grid of the well is static, and it doesn't
     // count the current dropping tetromino
+    case GAME_INIT:
+      return generateInitState()
     case GAME_START:
       return generateInitState(true)
     case GAME_PAUSE:
@@ -71,20 +76,38 @@ export default function root(state = {}, action) {
       }
       
       // position is not available => reaches the bottom-most position of the well
-      const newGrid = transferTetroGridIntoWell()
+      const newGrid = transferTetroGridIntoWell({
+        grid,
+        tetroGrid: currTetroGrid,
+        tetroPosition: currTetroPosition,
+        color: COLORS[currTetromino]
+      })
 
       if (hasLineToClear(newGrid)) {
-        // return _.merge({}, state, {
-        //   score: score + 10,
-        //   linesCleared: linesCleared + 1,
-        //   grid: clearLines(grid),
-        //   currTetromino: nextTetromino,
-        //   currTetroGrid: SHAPES[nextTetromino],
-        //   currTetroPosition: getInitTetroPosition(nextTetromino),
-        //   dropFrames: dropFrames + 1
-        // })
+        return _.merge({}, state, {
+          score: score + 10,  // todo: the bonus system should be more intelligent
+          linesCleared: linesCleared + 1,
+          grid: clearLines(newGrid),
+          currTetromino: nextTetromino,
+          currTetroGrid: SHAPES[nextTetromino],
+          currTetroPosition: getInitTetroPosition(nextTetromino),
+          nextTetromino: getRandomTetromino(),
+          dropFrames: dropFrames + 1
+        })
+      } else {
+        return _.times({}, state, {
+          grid: newGrid,
+          currTetromino: nextTetromino,
+          currTetroGrid: SHAPES[nextTetromino],
+          currTetroPosition: getInitTetroPosition(nextTetromino),
+          nextTetromino: getRandomTetromino()
+        })
       }
-
+    
+    case ENABLE_ACCELERATE:
+      return _.merge({}, state, { isAccelerating: true })
+    case DISABLE_ACCELERATE:
+      return _.merge({}, state, { isAccelerating: false })
     case TETROMINO_LAND:
     case CLEAR_LINE:
 

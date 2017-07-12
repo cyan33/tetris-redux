@@ -8,8 +8,8 @@ export const LINE_CLEAR_BONUS = [100, 200, 300, 400]
 
 // keys
 export const UP = 38
-export const LEFT = 40
-export const RIGHT = 37
+export const LEFT = 37
+export const RIGHT = 39
 export const DOWN = 40
 
 // game status

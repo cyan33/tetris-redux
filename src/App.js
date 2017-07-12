@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import {
-  gamePause, gameResume, gameStart, gameStop,
+  gameInit, gamePause, gameResume, gameStart, gameStop,
   moveLeft, moveRight, enableAccelerate, disableAccelerate, rotate
 } from './actions'
-import { UP, LEFT, RIGHT, DOWN } from './constants/options' 
+import { UP, LEFT, RIGHT, DOWN, PLAYING } from './constants/options' 
 
 import './App.css'
 
@@ -14,11 +14,15 @@ class App extends Component {
     super()
 
     this._onkeydown = this._onkeydown.bind(this)
+    this._onkeyup = this._onkeyup.bind(this)
   }
 
   componentDidMount() {
     window.addEventListener('keydown', this._onkeydown)
     window.addEventListener('keyup', this._onkeyup)
+
+    const { onGameInit } = this.props
+    onGameInit()
   }
 
   componentWillUnmount() {
@@ -33,11 +37,19 @@ class App extends Component {
       onMoveLeft,
       onMoveRight,
       onRotate,
-      onEnableAccelerate
+      onEnableAccelerate,
+      isPlaying
     } = this.props
 
     // todo: delete these later(* debug)
-    const { onGameStart } = this.props 
+    const { onGameStart, isAccelerating } = this.props 
+
+    if (e.keyCode === 83) {
+      onGameStart()
+      return
+    }
+
+    if(!isPlaying) return
 
     switch(e.keyCode) {
       case UP:
@@ -50,9 +62,8 @@ class App extends Component {
         onMoveRight()
         break
       case DOWN:
+        if (isAccelerating) return
         onEnableAccelerate()
-      case 83: // "S" => START
-        onGameStart()
         break
       default:
         return
@@ -60,7 +71,12 @@ class App extends Component {
   }
 
   _onkeyup(e) {
+    const { isPlaying, onDisableAccelerate } = this.props
+    if (!isPlaying) return
 
+    if (e.keyCode === DOWN) {
+      onDisableAccelerate()
+    }
   }
 
   render() {
@@ -72,12 +88,16 @@ class App extends Component {
   }
 }
 
-function mapStateToProps() {
-  return {}
+function mapStateToProps(state, ownProps) {
+  return {
+    isPlaying: state.gameStatus === PLAYING,
+    isAccelerating: state.isAccelerating,
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    onGameInit: () => dispatch(gameInit()),
     onGameStart: () => dispatch(gameStart()),
     onGamePause: () => dispatch(gamePause),
     onGameResume: () => dispatch(gameResume()),

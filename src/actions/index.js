@@ -1,4 +1,5 @@
 import {
+  GAME_INIT,
   GAME_START,
   GAME_PAUSE,
   GAME_STOP,
@@ -6,6 +7,12 @@ import {
 } from '../constants/actionTypes'
 
 import { MOVE, ENABLE_ACCELERATE, DISABLE_ACCELERATE, DROP, ROTATE } from '../constants/actionTypes'
+
+export function gameInit() {
+  return {
+    type: GAME_INIT,
+  }
+}
 
 export function gameStart() {
   return {

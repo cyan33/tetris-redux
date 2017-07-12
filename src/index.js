@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import root from './reducers/root'
 import logger from 'redux-logger'
+import _ from 'lodash'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 
@@ -18,6 +19,7 @@ const rootStore = createStore(
 // DEBUG
 window.root = rootStore
 window.fuck = fuck
+window._ = _
 
 ReactDOM.render(
   <Provider store={rootStore}>
