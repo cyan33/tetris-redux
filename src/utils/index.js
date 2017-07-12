@@ -29,7 +29,7 @@ export function generateInitState(isPlaying = false) {
     hasntStartedState : _.merge({}, hasntStartedState, {
       gameStatus: PLAYING,
       grid: generateEmptyWellGrid(),
-      nextTetomino: getRandomTetromino(),
+      nextTetromino: getRandomTetromino(),
       currTetromino,
       currTetroGrid,
       currTetroPosition: getInitTetroPosition(currTetroGrid),
@@ -48,7 +48,7 @@ export function getInitTetroPosition(currTetroGrid, col = WELL_COL) {
   return {
     // 'x' is the left-top point of the shape
     // to make it align center, we also need to minus half width of the tetromino
-    x: Math.floor(col / 2) - Math.floor(currTetroGrid[0].length / 2), 
+    x: Math.round(col / 2) - Math.round(currTetroGrid[0].length / 2), 
     y: -2
   }
 }
@@ -57,30 +57,22 @@ export function isPositionAvailable(grid, currTetroGrid, newPosition) {
   // determine whether if the tetromino crosses the wall
   // or overlaps others
 
-  // currTetroGrid: [
-  //   [1, 1],
-  //   [1, 1]
-  // ]
-  // newPosition: {
-  //   x: 11,
-  //   y: 6
-  // }
-
   // note that the single block is at the right bottom side of (x,y)
   // which is why we use '>' and sometimes '>=' instead
 
   const wellRow = grid.length
   const wellCol = grid[0].length
-  const tetroRow = currTetroGrid.length
-  const tetroCol = currTetroGrid[0].length
+  const rows = currTetroGrid.length
+  const cols = currTetroGrid[0].length
 
   let relativeX
   let relativeY
 
-  for (let row = 0; row < tetroRow; row++) {
-    for (let col = 0; col < tetroCol; col++) {
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
       // skip this loop if the current block is blank
       if (!currTetroGrid[row][col]) continue
+
       relativeX = newPosition.x + col
       relativeY = newPosition.y + row
 
@@ -91,7 +83,7 @@ export function isPositionAvailable(grid, currTetroGrid, newPosition) {
       }
 
       // overlap check
-      if (relativeY >= 0 && grid[relativeX][relativeY]) {
+      if (relativeY >= 0 && grid[relativeY][relativeX]) {
         console.info('THE GRID IS ALREADY OCCUPIED!!')
         return false
       }
@@ -171,12 +163,13 @@ export function transferTetroGridIntoWell({ grid, tetroGrid, tetroPosition, colo
 
   for (let row = 0; row < tetroGrid.length; row++) {
     for (let col = 0; col < tetroGrid[0].length; col++) {
-      if (!!tetroGrid[row][col]) continue
-      relativeX = tetroPosition.x + row
-      relativeY = tetroPosition.y + col
+      if (!tetroGrid[row][col]) continue
+      relativeX = tetroPosition.x + col
+      relativeY = tetroPosition.y + row
 
-      newGrid[relativeX][relativeY] = color
+      newGrid[relativeY][relativeX] = color
     }
   }
+  console.log('newGrid is:', newGrid)
   return newGrid
 }

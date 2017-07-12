@@ -1,14 +1,13 @@
 import _ from 'lodash'
 import {
-  GAME_INIT, GAME_START, GAME_PAUSE, GAME_RESUME, GAME_STOP,
-  CLEAR_LINE, TETROMINO_LAND,
+  GAME_INIT, GAME_START, GAME_PAUSE, GAME_RESUME,
   MOVE, ROTATE, DROP,
   ENABLE_ACCELERATE, DISABLE_ACCELERATE
 } from '../constants/actionTypes'
 import { PLAYING, PAUSING, STOPPED } from '../constants/gameStatus'
 
 import {
-  getRandomTetromino, generateEmptyWellGrid, getInitTetroPosition,
+  getRandomTetromino, getInitTetroPosition,
   isPositionAvailable, rotate, fitTetrominoWithinBoundaries,
   generateInitState, hasLineToClear, clearLines,
   transferTetroGridIntoWell
@@ -67,7 +66,7 @@ export default function root(state = {}, action) {
     case DROP:
       // get the newPosition 
       newPosition = _.merge({}, currTetroPosition, {
-        y: currTetroPosition + 1
+        y: currTetroPosition.y + 1
       })
 
       // drop until it hits something
@@ -79,7 +78,7 @@ export default function root(state = {}, action) {
       const newGrid = transferTetroGridIntoWell({
         grid,
         tetroGrid: currTetroGrid,
-        tetroPosition: currTetroPosition,
+        tetroPosition: currTetroPosition, // not newPosition!!
         color: COLORS[currTetromino]
       })
 
@@ -95,7 +94,7 @@ export default function root(state = {}, action) {
           dropFrames: dropFrames + 1
         })
       } else {
-        return _.times({}, state, {
+        return _.merge({}, state, {
           grid: newGrid,
           currTetromino: nextTetromino,
           currTetroGrid: SHAPES[nextTetromino],
@@ -108,9 +107,8 @@ export default function root(state = {}, action) {
       return _.merge({}, state, { isAccelerating: true })
     case DISABLE_ACCELERATE:
       return _.merge({}, state, { isAccelerating: false })
-    case TETROMINO_LAND:
-    case CLEAR_LINE:
-
+    // todo: add a drop bottom most action
+    // case DROP_BOTTOM_MOST:
     default:
       return state
   }

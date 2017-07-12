@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import {
-  gameInit, gamePause, gameResume, gameStart, gameStop,
-  moveLeft, moveRight, enableAccelerate, disableAccelerate, rotate
+  gameInit, gamePause, gameResume, gameStart,
+  moveLeft, moveRight, enableAccelerate, disableAccelerate, rotate, drop
 } from './actions'
 import { UP, LEFT, RIGHT, DOWN, PLAYING } from './constants/options' 
 
@@ -38,11 +38,13 @@ class App extends Component {
       onMoveRight,
       onRotate,
       onEnableAccelerate,
-      isPlaying
+      onDrop,
+      isPlaying,
+      isAccelerating
     } = this.props
 
     // todo: delete these later(* debug)
-    const { onGameStart, isAccelerating } = this.props 
+    const { onGameStart } = this.props 
 
     if (e.keyCode === 83) {
       onGameStart()
@@ -64,6 +66,9 @@ class App extends Component {
       case DOWN:
         if (isAccelerating) return
         onEnableAccelerate()
+        break
+      case 68: // "D"
+        onDrop()
         break
       default:
         return
@@ -104,6 +109,7 @@ function mapDispatchToProps(dispatch) {
     onMoveLeft: () => dispatch(moveLeft()),
     onMoveRight: () => dispatch(moveRight()),
     onRotate: () => dispatch(rotate()),
+    onDrop: () => dispatch(drop()),
     onEnableAccelerate: () => dispatch(enableAccelerate()),
     onDisableAccelerate: () => dispatch(disableAccelerate())
   }
