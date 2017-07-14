@@ -10,7 +10,7 @@ import {
   getRandomTetromino, getInitTetroPosition,
   isPositionAvailable, rotate, fitTetrominoWithinBoundaries,
   generateInitState, hasLineToClear, clearLines,
-  transferTetroGridIntoWell
+  transferTetroGridIntoWell, gameIsOver
 } from '../utils'
 import { SHAPES, COLORS } from '../constants/tetromino'
 
@@ -75,6 +75,12 @@ export default function root(state = {}, action) {
       }
       
       // position is not available => reaches the bottom-most position of the well
+      
+      // there is no extra room for the new tetromino, game over
+      if (currTetroPosition.y < 0) {
+        return _.merge({}, state, { gameStatus: STOPPED })
+      }
+      
       const newGrid = transferTetroGridIntoWell({
         grid,
         tetroGrid: currTetroGrid,

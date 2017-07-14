@@ -5,7 +5,8 @@ import {
   gameInit, gamePause, gameResume, gameStart,
   moveLeft, moveRight, enableAccelerate, disableAccelerate, rotate, drop
 } from './actions'
-import { UP, LEFT, RIGHT, DOWN, PLAYING } from './constants/options' 
+import { PLAYING } from './constants/gameStatus'
+import { UP, LEFT, RIGHT, DOWN } from './constants/options' 
 
 import './App.css'
 
@@ -104,7 +105,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onGameInit: () => dispatch(gameInit()),
     onGameStart: () => dispatch(gameStart()),
-    onGamePause: () => dispatch(gamePause),
+    onGamePause: () => dispatch(gamePause()),
     onGameResume: () => dispatch(gameResume()),
     onMoveLeft: () => dispatch(moveLeft()),
     onMoveRight: () => dispatch(moveRight()),
