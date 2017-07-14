@@ -5,8 +5,7 @@ import _ from 'lodash'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
-import App from './App'
-import './index.css';
+import TetrisGame from './TetrisGame'
 
 const rootStore = createStore(
   root,
@@ -19,7 +18,7 @@ window._ = _
 
 ReactDOM.render(
   <Provider store={rootStore}>
-    <App />
+    <TetrisGame />
   </Provider>,
   document.getElementById('root')
 )

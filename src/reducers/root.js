@@ -10,7 +10,7 @@ import {
   getRandomTetromino, getInitTetroPosition,
   isPositionAvailable, rotate, fitTetrominoWithinBoundaries,
   generateInitState, hasLineToClear, clearLines,
-  transferTetroGridIntoWell, gameIsOver
+  transferTetroGridIntoWell
 } from '../utils'
 import { SHAPES, COLORS } from '../constants/tetromino'
 

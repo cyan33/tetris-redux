@@ -1,0 +1,37 @@
+@import './colors.scss';
+
+.info-container {
+  flex: 2;
+  .info-title {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    color: #fff;
+    &.big {
+      font-size: 36px;
+    }
+    &.small {
+      font-size: 24px
+    }
+  }
+
+  .info-value {
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .next-tetro {
+    min-height: 220px;
+    background-color: $light-blue;
+  }
+  .score {
+    min-height: 165px;
+    background-color: $mint;
+    .section:nth-of-type(1) {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+

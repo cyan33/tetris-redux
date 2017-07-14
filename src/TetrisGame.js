@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import Well from './components/Well'
+import InfoPanel from './components/InfoPanel'
+
 import {
   gameInit, gamePause, gameResume, gameStart,
   moveLeft, moveRight, enableAccelerate, disableAccelerate, rotate, drop
@@ -8,9 +11,9 @@ import {
 import { PLAYING } from './constants/gameStatus'
 import { UP, LEFT, RIGHT, DOWN } from './constants/options' 
 
-import './App.css'
+import './components/styles/TetrisGame.css'
 
-class App extends Component {
+class TetrisGame extends Component {
   constructor() {
     super()
 
@@ -85,10 +88,21 @@ class App extends Component {
     }
   }
 
+  _getInfoPanelProps() {
+    const { score, linesCleared, nextTetromino, isPlaying } = this.props
+    return {
+      score,
+      linesCleared,
+      nextTetromino,
+      isPlaying
+    }
+  }
+
   render() {
     return (
-      <div>
-        <h1>Hello World!</h1>
+      <div className="tetris-container">
+        <Well />
+        <InfoPanel {...this._getInfoPanelProps()} />
       </div>
     )
   }
@@ -96,6 +110,9 @@ class App extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
+    score: state.score,
+    linesCleared: state.linesCleared,
+    nextTetromino: state.nextTetromino,
     isPlaying: state.gameStatus === PLAYING,
     isAccelerating: state.isAccelerating,
   }
@@ -116,4 +133,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(TetrisGame)

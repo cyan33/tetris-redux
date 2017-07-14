@@ -1,22 +1,35 @@
 import React, { Component } from 'react'
 
-import { PLAYING } from '../constants/gameStatus'
+import ControlButtons from './ControlButtons'
+import Tetromino from './Tetromino'
+
+import './styles/InfoPanel.css'
+
 const InfoPanel = ({
   score,
   linesCleared,
   nextTetromino,
-  gameStatus
+  isPlaying
 }) => (
-  <div>
-    <h3>Score</h3>
-    <p>{ score }</p>
-    <h3>Lines Cleared</h3>
-    <p>{ linesCleared }</p>
-    <h3>nextTetromino</h3>
-    {
-      gameStatus === PLAYING &&
-        <Tetromino />
-    }
+  <div className="info-container">
+    <div className="next-tetro">
+      <h3 className="info-title big">Next Tetro</h3>
+      {
+        isPlaying &&
+          <Tetromino />
+      }
+    </div>
+    <div className="score">
+      <div className="section">
+        <h3 className="info-title small">Your Score</h3>
+        <p className="info-value">{ score }</p>
+      </div>
+      <div className="section">
+        <h3 className="info-title small">Lines Cleared</h3>
+        <p className="info-value">{ linesCleared }</p>
+      </div>
+    </div>
+    <ControlButtons />
   </div>
 )
 
