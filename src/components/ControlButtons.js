@@ -22,15 +22,18 @@ class ControlButtons extends Component {
   }
 
   _getStartButtonProps() {
-    const { isPlaying, onGameStart } = this.props
+    const { gameStatus, onGameStart } = this.props
     return {
-      text: isPlaying ? 'Restart' : 'Start',
+      text: gameStatus !== STOPPED ? 'Restart' : 'Start',
       onClickHandler: onGameStart 
     }
   }
 
   _getDirectionButtonProps(direction) {
-    const { onMoveLeft, onMoveRight, onRotate, onEnableAccelerate, onDisableAccelerate } = this.props
+    const { isPlaying, onMoveLeft, onMoveRight, onRotate, onEnableAccelerate, onDisableAccelerate } = this.props
+    
+    if (!isPlaying) return { direction }
+
     switch(direction) {
       case 'left':
       case 'right':

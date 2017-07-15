@@ -2,6 +2,10 @@
   margin: 0;
   padding: 0; }
 
+button {
+  outline: none;
+  border: none; }
+
 .tetris-container {
   display: flex;
   position: relative;
