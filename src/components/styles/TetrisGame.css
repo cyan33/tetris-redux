@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0; }
 
+ul li {
+  list-style: none; }
+
 button {
   outline: none;
   border: none; }
