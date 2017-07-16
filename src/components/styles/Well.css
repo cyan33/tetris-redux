@@ -1,5 +1,5 @@
 .well-container {
-  flex: 5;
+  flex-basis: 295px;
   background-color: #e4faff; }
   .well-container .well-grid {
     position: relative;

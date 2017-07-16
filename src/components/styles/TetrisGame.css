@@ -16,6 +16,6 @@ button {
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: stretch;
-  width: 55%;
+  width: 530px;
   min-height: 590px;
   margin: 0 auto; }

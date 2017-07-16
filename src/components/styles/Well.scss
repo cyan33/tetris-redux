@@ -1,7 +1,7 @@
 @import './colors.scss';
 
 .well-container {
-  flex: 5;
+  flex-basis: 295px;
   background-color: $transparent-blue;
   .well-grid {
     position: relative;
