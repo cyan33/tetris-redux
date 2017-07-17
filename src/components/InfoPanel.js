@@ -16,7 +16,7 @@ const InfoPanel = ({
       <h3 className="info-title big">Next Tetro</h3>
       {
         isPlaying &&
-          <Tetromino />
+          <div>{nextTetromino}</div>
       }
     </div>
     <div className="score">

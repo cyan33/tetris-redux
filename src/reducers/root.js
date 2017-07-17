@@ -100,6 +100,7 @@ export default function root(state = {}, action) {
           dropFrames: dropFrames + 1
         })
       } else {
+        console.info("next tetro grid is(reducer): ", SHAPES[nextTetromino])
         return _.merge({}, state, {
           grid: newGrid,
           currTetromino: nextTetromino,

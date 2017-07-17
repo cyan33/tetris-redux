@@ -3,41 +3,51 @@ import { connect } from 'react-redux'
 
 import WellGrid from './WellGrid'
 import Tetromino from './Tetromino'
+import { COLORS } from '../constants/tetromino'
 
 import './styles/Well.css'
 
-const shit = [[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, null, null, null, null, null],
-[null, null, null, null, null, "#b04497", null, null, null, null],
-[null, null, null, null, "#b04497", "#b04497", "#b04497", null, null, null],
-[null, null, null, null, null, "#ed652f", null, null, null, null],
-[null, null, null, "#ed652f", "#ed652f", "#ed652f", null, null, null, null]]
+// const shit = [[null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, null, null, null, null, null],
+// [null, null, null, null, null, "#b04497", null, null, null, null],
+// [null, null, null, null, "#b04497", "#b04497", "#b04497", null, null, null],
+// [null, null, null, null, null, "#ed652f", null, null, null, null],
+// [null, null, null, "#ed652f", "#ed652f", "#ed652f", null, null, null, null]]
 
 class Well extends Component {
-  getWellGridProps() {
-
+  _getTetrominoProps() {
+    const { grid, currTetroGrid, currTetroPosition, currTetromino } = this.props
+    return {
+      grid,
+      color: COLORS[currTetromino],
+      tetroGrid: currTetroGrid,
+      tetroPosition: currTetroPosition
+    }
   }
 
   render() {
-    const { grid } = this.props
+    const { grid, currTetromino } = this.props
     return (
       <div className="well-container">
-        <WellGrid grid={ shit } />
-        {/*<Tetromino />*/}
+        <WellGrid grid={ grid } />
+        {
+          currTetromino &&
+            <Tetromino { ...this._getTetrominoProps() } />
+        }
       </div>
     )
   }
@@ -45,7 +55,10 @@ class Well extends Component {
 
 function mapStateToProps(state) {
   return {
-    grid: state.grid
+    grid: state.grid,
+    currTetromino: state.currTetromino,
+    currTetroGrid: state.currTetroGrid,
+    currTetroPosition: state.currTetroPosition
   }
 }
 

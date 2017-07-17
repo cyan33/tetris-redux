@@ -1,4 +1,5 @@
 .well-container {
+  position: relative;
   flex-basis: 295px;
   background-color: #e4faff; }
   .well-container .well-grid {
@@ -8,5 +9,14 @@
     .well-container .well-grid li.square-block-container {
       position: absolute; }
       .well-container .well-grid li.square-block-container .square-block {
+        width: 100%;
+        height: 100%; }
+  .well-container .tetromino {
+    position: absolute; }
+    .well-container .tetromino .square-block-container {
+      position: absolute;
+      width: 25%;
+      height: 25%; }
+      .well-container .tetromino .square-block-container .square-block {
         width: 100%;
         height: 100%; }

@@ -78,13 +78,11 @@ export function isPositionAvailable(grid, currTetroGrid, newPosition) {
 
       // boundary check
       if (relativeX < 0 || relativeX >= wellCol || relativeY >= wellRow) {
-        console.info('STOP!! CROSSING THE BOUNDARY!!')
         return false
       }
 
       // overlap check
       if (relativeY >= 0 && grid[relativeY][relativeX]) {
-        console.info('THE GRID IS ALREADY OCCUPIED!!')
         return false
       }
     }
@@ -170,6 +168,5 @@ export function transferTetroGridIntoWell({ grid, tetroGrid, tetroPosition, colo
       newGrid[relativeY][relativeX] = color
     }
   }
-  console.log('newGrid is:', newGrid)
   return newGrid
 }
