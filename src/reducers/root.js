@@ -38,9 +38,9 @@ export default function root(state = {}, action) {
     case GAME_START:
       return generateInitState(true)
     case GAME_PAUSE:
-      return _.merge({}, state, { gameStatus: PAUSING })
+      return _.assign({}, state, { gameStatus: PAUSING })
     case GAME_RESUME:
-      return _.merge({}, state, { gameStatus: PLAYING })
+      return _.assign({}, state, { gameStatus: PLAYING })
     case MOVE:
       // horizontal move
       newPosition = {
@@ -50,7 +50,7 @@ export default function root(state = {}, action) {
 
       if (!isPositionAvailable(grid, currTetroGrid, newPosition)) return state
       
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         currTetroPosition: newPosition
       })
     case ROTATE:
@@ -59,26 +59,26 @@ export default function root(state = {}, action) {
     
       if (!isPositionAvailable(grid, newTetroGrid, newPosition))  return state
       
-      else return _.merge({}, state, {
+      else return _.assign({}, state, {
         currTetroGrid: newTetroGrid,
         currTetroPosition: newPosition
       })
     case DROP:
       // get the newPosition 
-      newPosition = _.merge({}, currTetroPosition, {
+      newPosition = _.assign({}, currTetroPosition, {
         y: currTetroPosition.y + 1
       })
 
       // drop until it hits something
       if (isPositionAvailable(grid, currTetroGrid, newPosition)) {
-        return _.merge({}, state, { currTetroPosition: newPosition })
+        return _.assign({}, state, { currTetroPosition: newPosition })
       }
       
       // position is not available => reaches the bottom-most position of the well
       
       // there is no extra room for the new tetromino, game over
       if (currTetroPosition.y < 0) {
-        return _.merge({}, state, { gameStatus: STOPPED })
+        return _.assign({}, state, { gameStatus: STOPPED })
       }
       
       const newGrid = transferTetroGridIntoWell({
@@ -89,7 +89,7 @@ export default function root(state = {}, action) {
       })
 
       if (hasLineToClear(newGrid)) {
-        return _.merge({}, state, {
+        return _.assign({}, state, {
           score: score + 10,  // todo: the bonus system should be more intelligent
           linesCleared: linesCleared + 1,
           grid: clearLines(newGrid),
@@ -100,8 +100,7 @@ export default function root(state = {}, action) {
           dropFrames: dropFrames + 1
         })
       } else {
-        console.info("next tetro grid is(reducer): ", SHAPES[nextTetromino])
-        return _.merge({}, state, {
+        return Object.assign({}, state, {
           grid: newGrid,
           currTetromino: nextTetromino,
           currTetroGrid: SHAPES[nextTetromino],
@@ -111,9 +110,9 @@ export default function root(state = {}, action) {
       }
     
     case ENABLE_ACCELERATE:
-      return _.merge({}, state, { isAccelerating: true })
+      return _.assign({}, state, { isAccelerating: true })
     case DISABLE_ACCELERATE:
-      return _.merge({}, state, { isAccelerating: false })
+      return _.assign({}, state, { isAccelerating: false })
     // todo: add a drop bottom most action
     // case DROP_BOTTOM_MOST:
     default:
