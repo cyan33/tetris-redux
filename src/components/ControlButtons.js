@@ -24,7 +24,7 @@ class ControlButtons extends Component {
   _getStartButtonProps() {
     const { gameStatus, onGameStart } = this.props
     return {
-      text: gameStatus !== STOPPED ? 'Restart' : 'Start',
+      text: 'Start',
       onClickHandler: onGameStart 
     }
   }

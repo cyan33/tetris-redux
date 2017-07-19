@@ -7,27 +7,6 @@ import { COLORS } from '../constants/tetromino'
 
 import './styles/Well.css'
 
-// const shit = [[null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, null, null, null, null, null],
-// [null, null, null, null, null, "#b04497", null, null, null, null],
-// [null, null, null, null, "#b04497", "#b04497", "#b04497", null, null, null],
-// [null, null, null, null, null, "#ed652f", null, null, null, null],
-// [null, null, null, "#ed652f", "#ed652f", "#ed652f", null, null, null, null]]
-
 class Well extends Component {
   _getTetrominoProps() {
     const { grid, currTetroGrid, currTetroPosition, currTetromino } = this.props

@@ -25,14 +25,26 @@ class TetrisGame extends Component {
     window.addEventListener('keydown', this._onkeydown)
     window.addEventListener('keyup', this._onkeyup)
 
-    const { onGameInit } = this.props
+    const { onGameInit, onDrop, isPlaying } = this.props
     onGameInit()
   }
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this._onkeydown)
     window.removeEventListener('keyup', this._onkeyup)
+
+    clearInterval(this.dropTimer)
   }
+
+  // componentDidUpdate() {
+  //   const { isPlaying, onDrop, dropInterval } = this.props
+
+  //   this.dropTimer = setInterval(() => {
+  //     if (isPlaying) {
+  //       onDrop()
+  //     }
+  //   }, dropInterval)
+  // }
 
   _onkeydown(e) {
     e.preventDefault()
@@ -42,18 +54,9 @@ class TetrisGame extends Component {
       onMoveRight,
       onRotate,
       onEnableAccelerate,
-      onDrop,
       isPlaying,
       isAccelerating
     } = this.props
-
-    // todo: delete these later(* debug)
-    const { onGameStart } = this.props 
-
-    if (e.keyCode === 83) {
-      onGameStart()
-      return
-    }
 
     if(!isPlaying) return
 
@@ -70,9 +73,6 @@ class TetrisGame extends Component {
       case DOWN:
         if (isAccelerating) return
         onEnableAccelerate()
-        break
-      case 68: // "D"
-        onDrop()
         break
       default:
         return
@@ -115,6 +115,7 @@ function mapStateToProps(state, ownProps) {
     nextTetromino: state.nextTetromino,
     isPlaying: state.gameStatus === PLAYING,
     isAccelerating: state.isAccelerating,
+    dropInterval: state.dropInterval,
   }
 }
 

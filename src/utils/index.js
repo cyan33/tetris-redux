@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 import { PLAYING, STOPPED } from '../constants/gameStatus'
-import { WELL_COL, WELL_ROW, DROP_FRAMES_DEFAULT } from '../constants/options'
+import { WELL_COL, WELL_ROW, DROP_INTERVAL_DEFAULT } from '../constants/options'
 import { TETROMINOS, SHAPES } from '../constants/tetromino'
 
 export function generateEmptyWellGrid(row = WELL_ROW, col = WELL_COL) {
@@ -26,14 +26,14 @@ export function generateInitState(isPlaying = false) {
   const currTetroGrid = SHAPES[currTetromino]
 
   return isPlaying === false ?
-    hasntStartedState : _.merge({}, hasntStartedState, {
+    hasntStartedState : _.assign({}, hasntStartedState, {
       gameStatus: PLAYING,
       grid: generateEmptyWellGrid(),
       nextTetromino: getRandomTetromino(),
       currTetromino,
       currTetroGrid,
       currTetroPosition: getInitTetroPosition(currTetroGrid),
-      dropFrames: DROP_FRAMES_DEFAULT,
+      dropInterval: DROP_INTERVAL_DEFAULT,
       isAccelerating: false
     })
 }

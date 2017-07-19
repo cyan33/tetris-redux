@@ -13,6 +13,7 @@ import {
   transferTetroGridIntoWell
 } from '../utils'
 import { SHAPES, COLORS } from '../constants/tetromino'
+import { DROP_INTERVAL_DEC, DROP_INTERVAL_MIN } from '../constants/options'
 
 export default function root(state = {}, action) {
   let {
@@ -24,7 +25,7 @@ export default function root(state = {}, action) {
     currTetroGrid,
     currTetromino,
     currTetroPosition,
-    dropFrames,
+    dropInterval,
     isAccelerating
   } = state
 
@@ -97,7 +98,7 @@ export default function root(state = {}, action) {
           currTetroGrid: SHAPES[nextTetromino],
           currTetroPosition: getInitTetroPosition(nextTetromino),
           nextTetromino: getRandomTetromino(),
-          dropFrames: dropFrames + 1
+          dropInterval: dropInterval <= DROP_INTERVAL_MIN ? DROP_INTERVAL_MIN :  dropInterval - DROP_INTERVAL_DEC
         })
       } else {
         return Object.assign({}, state, {

@@ -20,6 +20,6 @@ export const newGame = {
   //   "x": 3,
   //   "y": 6
   // },
-  // dropFrames: 48,
+  // dropInterval: 48,
   // isAccelerating: false
 }

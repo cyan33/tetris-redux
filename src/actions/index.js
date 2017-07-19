@@ -7,6 +7,8 @@ import {
 } from '../constants/actionTypes'
 
 import { MOVE, ENABLE_ACCELERATE, DISABLE_ACCELERATE, DROP, ROTATE } from '../constants/actionTypes'
+import { PLAYING, STOPPED } from '../constants/gameStatus'
+import { DROP_INTERVAL_ACCELERATING } from '../constants/options'
 
 export function gameInit() {
   return {
@@ -14,10 +16,10 @@ export function gameInit() {
   }
 }
 
-export function gameStart() {
-  return {
-    type: GAME_START,
-  }
+// thunk
+export const gameStart = () => dispatch => {
+  dispatch({ type: GAME_START })
+  dispatch(drop())
 }
 
 export function gamePause() {
@@ -52,10 +54,18 @@ export const moveLeft = () => {
   }
 }
 
-export const drop = () => {
-  return {
-    type: DROP
+// thunk
+export const drop = () => (dispatch, getState) => {
+  const { gameStatus, isAccelerating, dropInterval } = getState()
+  if (gameStatus === STOPPED) return
+
+  if (gameStatus === PLAYING) {
+    dispatch({ type: DROP })
   }
+
+  setTimeout(() => {
+    dispatch(drop())
+  }, isAccelerating ? DROP_INTERVAL_ACCELERATING : dropInterval)
 }
 
 export const enableAccelerate = () => {

@@ -11,11 +11,12 @@ button {
 
 .tetris-container {
   display: flex;
+  margin: 0 auto;
+  overflow: hidden;
   position: relative;
   top: 20px;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: stretch;
   width: 530px;
-  min-height: 590px;
-  margin: 0 auto; }
+  min-height: 590px; }

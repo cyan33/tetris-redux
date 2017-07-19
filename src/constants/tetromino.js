@@ -1,11 +1,11 @@
 export const TETROMINOS = ['I', 'O', 'T', 'J', 'L', 'S', 'Z']
 export const COLORS = {
-  I: '#3cc7d6',
-  O: '#fbb414',
-  T: '#b04497',
-  J: '#3993d0',
-  L: '#ed652f',
-  S: '#95c43d',
+  I: '#67b0d4',
+  O: '#f6d42b',
+  T: '#fcbab8',
+  J: '#f9b26c',
+  L: '#7a4084',
+  S: '#24c4a0',
   Z: '#e84138'
 }
 
