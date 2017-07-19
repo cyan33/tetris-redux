@@ -17,9 +17,16 @@ export function gameInit() {
 }
 
 // thunk
-export const gameStart = () => dispatch => {
+export const gameStart = () => (dispatch, getState) => {
+  // the previous gameStatus
+  const { gameStatus } = getState()
+
   dispatch({ type: GAME_START })
-  dispatch(drop())
+
+  // skip dispatch if it's restart
+  if (gameStatus === STOPPED) {
+    dispatch(drop())
+  }
 }
 
 export function gamePause() {
