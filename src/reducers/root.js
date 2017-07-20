@@ -103,6 +103,7 @@ export default function root(state = {}, action) {
       } else {
         return Object.assign({}, state, {
           grid: newGrid,
+          score: score + 4,
           currTetromino: nextTetromino,
           currTetroGrid: SHAPES[nextTetromino],
           currTetroPosition: getInitTetroPosition(nextTetromino),

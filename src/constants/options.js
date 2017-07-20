@@ -13,3 +13,14 @@ export const UP = 38
 export const LEFT = 37
 export const RIGHT = 39
 export const DOWN = 40
+
+export const GAME_INTRO = 'This game is a simplified\
+ implementation(about 2K lines of code) of the famous\
+  game **Tetris**.<br /><br />If you are new to *React* or *Redux*,\
+   this could probably be a good choice where you could get your\
+    hands dirty. So do not forget to check the\
+     **[source code](https://github.com/thomasyimgit/Tetris)**.\
+      <br /><br />Thanks to **[@Rose](https://twitter.com/luosihua)** for\
+       this awesome UI design, without which this wouldn\'t\
+        come into realization.<br /><br /> Built by \
+        **[@Chang](https://twitter.com/ThomasYimm)**.'

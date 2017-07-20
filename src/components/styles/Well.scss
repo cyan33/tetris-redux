@@ -31,4 +31,17 @@
       }
     }
   }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    color: $deepest-blue;
+    padding: 15px;
+    line-height: 2;
+    background: $transparent-blue-transparent;
+    a {
+      text-decoration: none;
+    }
+  }
 }

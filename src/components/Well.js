@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import marked from 'marked'
 
 import WellGrid from './WellGrid'
 import Tetromino from './Tetromino'
+import Overlay from './Overlay'
 import { COLORS } from '../constants/tetromino'
+import { PLAYING } from '../constants/gameStatus'
+import { GAME_INTRO } from '../constants/options'
 
 import './styles/Well.css'
 
@@ -19,13 +23,17 @@ class Well extends Component {
   }
 
   render() {
-    const { grid, currTetromino } = this.props
+    const { grid, currTetromino, gameStatus } = this.props
     return (
       <div className="well-container">
         <WellGrid grid={ grid } />
         {
           currTetromino &&
             <Tetromino { ...this._getTetrominoProps() } />
+        }
+        {
+          gameStatus !== PLAYING &&
+            <Overlay text={marked(GAME_INTRO)} />
         }
       </div>
     )
@@ -34,6 +42,7 @@ class Well extends Component {
 
 function mapStateToProps(state) {
   return {
+    gameStatus: state.gameStatus,
     grid: state.grid,
     currTetromino: state.currTetromino,
     currTetroGrid: state.currTetroGrid,
