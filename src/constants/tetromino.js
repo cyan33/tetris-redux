@@ -9,6 +9,8 @@ export const COLORS = {
   Z: '#e84138'
 }
 
+export const NEXT_TETRO_COLOR = '#54b5cd'
+
 // the shape of each tetro
 export const SHAPES = {
   I: [[0, 0, 0, 0], [1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0]],

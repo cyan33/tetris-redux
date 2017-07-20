@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 
 import SquareBlock from './SquareBlock'
+import { WELL_ROW, WELL_COL } from '../constants/options'
+import { SHAPES } from '../constants/tetromino'
 
 export default class Tetromino extends Component {
-  _getTetrominoStyle() {
-    const { grid, tetroGrid, tetroPosition } = this.props
-    if (!grid)  return
+  _getTetrominoUlStyle() {
+    const { tetroGrid, tetroPosition, isNextTetromino } = this.props
 
-    const rows = grid.length
-    const cols = grid[0].length
+    // todo: remove all redundant grid.length and grid[0].length
+    // use WELL_ROW and WELL_COL
+    const rows = WELL_ROW
+    const cols = WELL_COL
 
     // for each single block
     const widthPercent = 100 / cols
@@ -24,6 +27,19 @@ export default class Tetromino extends Component {
       height: `${4 * heightPercent}%`,
       top: `${tetroPosition.y * heightPercent}%`,
       left: `${tetroPosition.x * widthPercent}%`
+    }
+  }
+
+  _getNextTetrominoUlStyle() {
+    const { tetroGrid } = this.props
+
+    return {
+      width: '65%',
+      height: '65%',
+      top: '35%',
+      // the 4x4 grid doesn't fit well into the nextTetromino panel
+      // use the hack style for now
+      left: tetroGrid === SHAPES['I'] ? '18%' : '30%' 
     }
   }
 
@@ -56,8 +72,9 @@ export default class Tetromino extends Component {
   }
 
   render() {
+    const { isNextTetromino } = this.props
     return (
-      <ul className="tetromino" style={this._getTetrominoStyle()}>
+      <ul className="tetromino" style={isNextTetromino ? this._getNextTetrominoUlStyle() : this._getTetrominoUlStyle()}>
         { this._renderTetromino() }
       </ul>
     )

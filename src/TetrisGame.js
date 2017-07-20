@@ -89,12 +89,12 @@ class TetrisGame extends Component {
   }
 
   _getInfoPanelProps() {
-    const { score, linesCleared, nextTetromino, isPlaying } = this.props
+    const { score, linesCleared, nextTetromino, gameStatus } = this.props
     return {
       score,
       linesCleared,
       nextTetromino,
-      isPlaying
+      gameStatus
     }
   }
 
@@ -110,6 +110,7 @@ class TetrisGame extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
+    gameStatus: state.gameStatus,
     score: state.score,
     linesCleared: state.linesCleared,
     nextTetromino: state.nextTetromino,
