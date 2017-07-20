@@ -22,4 +22,4 @@ Press the "Start" button and enjoy yourself.
 
 ## Demo
 
-![Tetris_demo](https://i.loli.net/2017/07/20/5970ba493857c.png)
+![Tetris_demo](https://i.loli.net/2017/07/20/5970bb6047f79.gif)
