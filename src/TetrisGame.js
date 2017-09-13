@@ -25,7 +25,7 @@ class TetrisGame extends Component {
     window.addEventListener('keydown', this._onkeydown)
     window.addEventListener('keyup', this._onkeyup)
 
-    const { onGameInit, onDrop, isPlaying } = this.props
+    const { onGameInit } = this.props
     onGameInit()
   }
 

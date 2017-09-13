@@ -6,7 +6,7 @@ import { SHAPES } from '../constants/tetromino'
 
 export default class Tetromino extends Component {
   _getTetrominoUlStyle() {
-    const { tetroGrid, tetroPosition, isNextTetromino } = this.props
+    const { tetroPosition } = this.props
 
     // todo: remove all redundant grid.length and grid[0].length
     // use WELL_ROW and WELL_COL
@@ -44,7 +44,7 @@ export default class Tetromino extends Component {
   }
 
   _renderTetromino() {
-    const { tetroGrid, tetroPosition, color } = this.props
+    const { tetroGrid, color } = this.props
     if (!tetroGrid) return
 
     const rows = tetroGrid.length

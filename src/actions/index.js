@@ -17,6 +17,20 @@ export function gameInit() {
 }
 
 // thunk
+export const drop = () => (dispatch, getState) => {
+  const { gameStatus, isAccelerating, dropInterval } = getState()
+  if (gameStatus === STOPPED) return
+
+  if (gameStatus === PLAYING) {
+    dispatch({ type: DROP })
+  }
+
+  setTimeout(() => {
+    dispatch(drop())
+  }, isAccelerating ? DROP_INTERVAL_ACCELERATING : dropInterval)
+}
+
+// thunk
 export const gameStart = () => (dispatch, getState) => {
   // the previous gameStatus
   const { gameStatus } = getState()
@@ -59,20 +73,6 @@ export const moveLeft = () => {
     type: MOVE,
     payload: -1
   }
-}
-
-// thunk
-export const drop = () => (dispatch, getState) => {
-  const { gameStatus, isAccelerating, dropInterval } = getState()
-  if (gameStatus === STOPPED) return
-
-  if (gameStatus === PLAYING) {
-    dispatch({ type: DROP })
-  }
-
-  setTimeout(() => {
-    dispatch(drop())
-  }, isAccelerating ? DROP_INTERVAL_ACCELERATING : dropInterval)
 }
 
 export const enableAccelerate = () => {

@@ -17,7 +17,6 @@ import { DROP_INTERVAL_DEC, DROP_INTERVAL_MIN } from '../constants/options'
 
 export default function root(state = {}, action) {
   let {
-    gameStatus,
     score,
     linesCleared,
     grid,
@@ -25,8 +24,7 @@ export default function root(state = {}, action) {
     currTetroGrid,
     currTetromino,
     currTetroPosition,
-    dropInterval,
-    isAccelerating
+    dropInterval
   } = state
 
   let newPosition

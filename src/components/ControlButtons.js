@@ -6,7 +6,7 @@ import DirectionButton from './DirectionButton'
 import { PLAYING, STOPPED, PAUSING } from '../constants/gameStatus'
 import GameStatusButton from './GameStatusButton'
 import { 
-  gameInit, gamePause, gameResume, gameStart,
+  gamePause, gameResume, gameStart,
   moveLeft, moveRight, enableAccelerate, disableAccelerate, rotate
 } from '../actions'
 

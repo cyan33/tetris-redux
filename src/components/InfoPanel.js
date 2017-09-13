@@ -20,7 +20,7 @@ class InfoPanel extends Component {
   }
 
   render() {
-    const { score, linesCleared, nextTetromino, gameStatus } = this.props
+    const { score, linesCleared, gameStatus } = this.props
     
     return (
       <div className="info-container">
