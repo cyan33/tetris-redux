@@ -11,7 +11,7 @@ import { GAME_INTRO } from '../constants/options'
 
 import './styles/Well.css'
 
-class Well extends Component {
+export class Well extends Component {
   _getTetrominoProps() {
     const { grid, currTetroGrid, currTetroPosition, currTetromino } = this.props
     return {

@@ -13,7 +13,8 @@ import { UP, LEFT, RIGHT, DOWN } from './constants/options'
 
 import './components/styles/TetrisGame.css'
 
-class TetrisGame extends Component {
+// export common class component for test
+export class TetrisGame extends Component {
   constructor() {
     super()
 
