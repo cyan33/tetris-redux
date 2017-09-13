@@ -82,7 +82,7 @@ export default function root(state = {}, action) {
         return _.assign({}, state, { gameStatus: STOPPED })
       }
       
-      const newGrid = transferTetroGridIntoWell({
+      let newGrid = transferTetroGridIntoWell({
         grid,
         tetroGrid: currTetroGrid,
         tetroPosition: currTetroPosition, // not newPosition!!
@@ -101,7 +101,7 @@ export default function root(state = {}, action) {
           dropInterval: dropInterval <= DROP_INTERVAL_MIN ? DROP_INTERVAL_MIN :  dropInterval - DROP_INTERVAL_DEC
         })
       } else {
-        return Object.assign({}, state, {
+        return _.assign({}, state, {
           grid: newGrid,
           score: score + 4,
           currTetromino: nextTetromino,
