@@ -13,7 +13,9 @@
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0"
   },
+  "homepage": "http://thomasyimgit.github.io/Tetris",
   "devDependencies": {
+    "gh-pages": "^1.0.0",
     "react-scripts": "0.9.5"
   },
   "scripts": {
@@ -23,6 +25,8 @@
     "build-css": "node-sass-chokidar src/components/styles -o src/components/styles",
     "watch-css": "npm run build-css && node-sass-chokidar src/components/styles -o src/components/styles --watch --recursive",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
