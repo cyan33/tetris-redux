@@ -156,7 +156,8 @@ export function clearLines(grid) {
 }
 
 export function transferTetroGridIntoWell({ grid, tetroGrid, tetroPosition, color }) {
-  let newGrid = [...grid]
+  let newGrid = grid.map(row => row.map(col => col))
+  
   let relativeX, relativeY
 
   for (let row = 0; row < tetroGrid.length; row++) {
