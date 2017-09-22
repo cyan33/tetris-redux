@@ -147,7 +147,7 @@ export function clearLines(grid) {
   
   return grid.reduce((result, row) => {
     if (!row.every(el => el !== null)) {
-      result.push(row)
+      result.push([...newRow])
     } else {
       result.unshift(emptyRow)
     }
