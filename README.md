@@ -12,6 +12,9 @@ I also wrote some refletions after writing the game. Click [here](https://thomas
 ## Features
 
 * Bootstrapped with `create-react-app`
+* Designed the view layer with React.js
+* Manage the game state with Redux, and Redux-thunk
+* Functional programming utilities with ES6 and lodash
 
 ## Get Started - How to Play the Game Locally
 
