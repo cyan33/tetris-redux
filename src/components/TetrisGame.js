@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Well from './components/Well'
-import InfoPanel from './components/InfoPanel'
+import Well from './Well'
+import InfoPanel from './InfoPanel'
 
 import {
   gameInit, gamePause, gameResume, gameStart,
   moveLeft, moveRight, enableAccelerate, disableAccelerate, rotate, drop
-} from './actions'
-import { PLAYING } from './constants/gameStatus'
-import { UP, LEFT, RIGHT, DOWN } from './constants/options' 
+} from '../actions'
+import { PLAYING } from '../constants/gameStatus'
+import { UP, LEFT, RIGHT, DOWN } from '../constants/options' 
 
-import './components/styles/TetrisGame.css'
+import './styles/TetrisGame.css'
 
 // export common class component for test
 export class TetrisGame extends Component {
