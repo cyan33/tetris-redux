@@ -14,7 +14,7 @@ I also wrote some refletions after writing the game. Click [here](https://thomas
 - Bootstrapped with `create-react-app`
 - Design the view layer with React.js
 - Manage the game state with Redux, and Redux-thunk
-- Offline support (todo)
+- Offline support with localStorage
 - Mobile support (todo)
 
 ## Installation
