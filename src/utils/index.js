@@ -3,7 +3,6 @@ import _ from 'lodash'
 import { PLAYING, STOPPED } from '../constants/gameStatus'
 import { WELL_COL, WELL_ROW, DROP_INTERVAL_DEFAULT } from '../constants/options'
 import { TETROMINOS, SHAPES } from '../constants/tetromino'
-import { getTetrisStateFromStorage } from './storage'
 
 export function generateEmptyWellGrid(row = WELL_ROW, col = WELL_COL) {
   return _.times(row, () => {

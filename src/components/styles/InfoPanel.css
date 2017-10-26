@@ -32,6 +32,7 @@
     min-height: 165px;
     background-color: #5fd1d7; }
     .info-container .score .section:nth-of-type(1) {
+      margin-top: 10px;
       margin-bottom: 10px; }
   .info-container .control-buttons {
     flex-basis: 35%;
