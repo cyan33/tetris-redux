@@ -3,6 +3,7 @@ import _ from 'lodash'
 import { PLAYING, STOPPED } from '../constants/gameStatus'
 import { WELL_COL, WELL_ROW, DROP_INTERVAL_DEFAULT } from '../constants/options'
 import { TETROMINOS, SHAPES } from '../constants/tetromino'
+import { getTetrisStateFromStorage } from './storage'
 
 export function generateEmptyWellGrid(row = WELL_ROW, col = WELL_COL) {
   return _.times(row, () => {
@@ -170,4 +171,16 @@ export function transferTetroGridIntoWell({ grid, tetroGrid, tetroPosition, colo
     }
   }
   return newGrid
+}
+
+export function setDropTimeout(cb, interval) {
+  clearDropTimeout()
+  window.dropTimer = setTimeout(cb, interval)
+}
+
+// bad
+export function clearDropTimeout() {
+  if (!window.dropTimer)  return
+  clearTimeout(window.dropTimer)
+  window.dropTimer = null
 }

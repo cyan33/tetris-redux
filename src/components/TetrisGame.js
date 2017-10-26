@@ -5,8 +5,8 @@ import Well from './Well'
 import InfoPanel from './InfoPanel'
 
 import {
-  gameInit, gamePause, gameResume, gameStart,
-  moveLeft, moveRight, enableAccelerate, disableAccelerate, rotate, drop
+  gameInit, gamePause, gameResume,
+  moveLeft, moveRight, enableAccelerate, disableAccelerate, rotate
 } from '../actions'
 import { PLAYING } from '../constants/gameStatus'
 import { UP, LEFT, RIGHT, DOWN } from '../constants/options' 
@@ -33,19 +33,7 @@ export class TetrisGame extends Component {
   componentWillUnmount() {
     window.removeEventListener('keydown', this._onkeydown)
     window.removeEventListener('keyup', this._onkeyup)
-
-    clearInterval(this.dropTimer)
   }
-
-  // componentDidUpdate() {
-  //   const { isPlaying, onDrop, dropInterval } = this.props
-
-  //   this.dropTimer = setInterval(() => {
-  //     if (isPlaying) {
-  //       onDrop()
-  //     }
-  //   }, dropInterval)
-  // }
 
   _onkeydown(e) {
     e.preventDefault()
@@ -117,20 +105,17 @@ function mapStateToProps(state, ownProps) {
     nextTetromino: state.nextTetromino,
     isPlaying: state.gameStatus === PLAYING,
     isAccelerating: state.isAccelerating,
-    dropInterval: state.dropInterval,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onGameInit: () => dispatch(gameInit()),
-    onGameStart: () => dispatch(gameStart()),
     onGamePause: () => dispatch(gamePause()),
     onGameResume: () => dispatch(gameResume()),
     onMoveLeft: () => dispatch(moveLeft()),
     onMoveRight: () => dispatch(moveRight()),
     onRotate: () => dispatch(rotate()),
-    onDrop: () => dispatch(drop()),
     onEnableAccelerate: () => dispatch(enableAccelerate()),
     onDisableAccelerate: () => dispatch(disableAccelerate())
   }

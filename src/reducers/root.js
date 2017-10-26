@@ -10,8 +10,10 @@ import {
   getRandomTetromino, getInitTetroPosition,
   isPositionAvailable, rotate, fitTetrominoWithinBoundaries,
   generateInitState, hasLineToClear, clearLines,
-  transferTetroGridIntoWell
+  transferTetroGridIntoWell,
+  clearDropTimeout
 } from '../utils'
+import { getTetrisStateFromStorage, updateTetrisStateStorage } from '../utils/storage'
 import { SHAPES, COLORS } from '../constants/tetromino'
 import { DROP_INTERVAL_DEC, DROP_INTERVAL_MIN } from '../constants/options'
 
@@ -33,7 +35,7 @@ export default function root(state = {}, action) {
     // the grid of the well is static, and it doesn't
     // count the current dropping tetromino
     case GAME_INIT:
-      return generateInitState()
+      return getTetrisStateFromStorage() || generateInitState()
     case GAME_START:
       return generateInitState(true)
     case GAME_PAUSE:
@@ -70,13 +72,15 @@ export default function root(state = {}, action) {
 
       // drop until it hits something
       if (isPositionAvailable(grid, currTetroGrid, newPosition)) {
-        return _.assign({}, state, { currTetroPosition: newPosition })
+        return updateTetrisStateStorage(_.assign({}, state, { currTetroPosition: newPosition }))
       }
       
       // position is not available => reaches the bottom-most position of the well
       
       // there is no extra room for the new tetromino, game over
       if (currTetroPosition.y < 0) {
+        clearDropTimeout()
+        updateTetrisStateStorage(null)
         return _.assign({}, state, { gameStatus: STOPPED })
       }
       
@@ -88,8 +92,8 @@ export default function root(state = {}, action) {
       })
 
       if (hasLineToClear(newGrid)) {
-        return _.assign({}, state, {
-          score: score + 10,  // todo: the bonus system should be more intelligent
+        return updateTetrisStateStorage(_.assign({}, state, {
+          score: score + 10,
           linesCleared: linesCleared + 1,
           grid: clearLines(newGrid),
           currTetromino: nextTetromino,
@@ -97,24 +101,22 @@ export default function root(state = {}, action) {
           currTetroPosition: getInitTetroPosition(nextTetromino),
           nextTetromino: getRandomTetromino(),
           dropInterval: dropInterval <= DROP_INTERVAL_MIN ? DROP_INTERVAL_MIN :  dropInterval - DROP_INTERVAL_DEC
-        })
+        }))
       } else {
-        return _.assign({}, state, {
+        return updateTetrisStateStorage(_.assign({}, state, {
           grid: newGrid,
           score: score + 4,
           currTetromino: nextTetromino,
           currTetroGrid: SHAPES[nextTetromino],
           currTetroPosition: getInitTetroPosition(nextTetromino),
           nextTetromino: getRandomTetromino()
-        })
+        }))
       }
     
     case ENABLE_ACCELERATE:
       return _.assign({}, state, { isAccelerating: true })
     case DISABLE_ACCELERATE:
       return _.assign({}, state, { isAccelerating: false })
-    // todo: add a drop bottom most action
-    // case DROP_BOTTOM_MOST:
     default:
       return state
   }

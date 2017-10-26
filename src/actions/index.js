@@ -9,8 +9,10 @@ import {
 import { MOVE, ENABLE_ACCELERATE, DISABLE_ACCELERATE, DROP, ROTATE } from '../constants/actionTypes'
 import { PLAYING, STOPPED } from '../constants/gameStatus'
 import { DROP_INTERVAL_ACCELERATING } from '../constants/options'
+import { setDropTimeout, clearDropTimeout } from '../utils'
 
 export function gameInit() {
+  clearDropTimeout()
   return {
     type: GAME_INIT,
   }
@@ -19,43 +21,38 @@ export function gameInit() {
 // thunk
 export const drop = () => (dispatch, getState) => {
   const { gameStatus, isAccelerating, dropInterval } = getState()
-  if (gameStatus === STOPPED) return
+  // this is ugly tho
+  setDropTimeout(() => {
+    if (gameStatus === STOPPED) return
+    
+    if (gameStatus === PLAYING) {
+      dispatch({ type: DROP })
+    }
 
-  if (gameStatus === PLAYING) {
-    dispatch({ type: DROP })
-  }
-
-  setTimeout(() => {
     dispatch(drop())
   }, isAccelerating ? DROP_INTERVAL_ACCELERATING : dropInterval)
 }
 
 // thunk
 export const gameStart = () => (dispatch, getState) => {
-  // the previous gameStatus
-  const { gameStatus } = getState()
-
   dispatch({ type: GAME_START })
-
-  // skip dispatch if it's restart
-  if (gameStatus === STOPPED) {
-    dispatch(drop())
-  }
+  dispatch(drop())
 }
 
 export function gamePause() {
+  clearDropTimeout()
   return {
     type: GAME_PAUSE,
   }
 }
 
-export function gameResume() {
-  return {
-    type: GAME_RESUME,
-  }
+export const gameResume = () => (dispatch, getState) => {
+  dispatch({ type: GAME_RESUME })
+  dispatch(drop())
 }
 
 export function gameStop() {
+  clearDropTimeout()
   return {
     type: GAME_STOP,
   }
