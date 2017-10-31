@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import SquareBlock from './SquareBlock'
 
@@ -46,4 +47,8 @@ export default class WellGrid extends Component {
       </ul>
     )
   }
+}
+
+WellGrid.PropTypes = {
+  grid: PropTypes.array
 }

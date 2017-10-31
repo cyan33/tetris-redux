@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const DirectionButton = ({
   direction,
@@ -29,6 +30,13 @@ const DirectionButton = ({
     }
   </div>
 )
+
+DirectionButton.PropTypes = {
+  direction: PropTypes.string,
+  onClickHandler: PropTypes.func,
+  onMouseDownHandler: PropTypes.func,
+  onMouseUpHandler: PropTypes.func
+}
 
 export default DirectionButton
 

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import ControlButtons from './ControlButtons'
 import Tetromino from './Tetromino'
 
-import { NEXT_TETRO_COLOR, SHAPES } from '../constants/tetromino'
+import { NEXT_TETRO_COLOR, SHAPES, TETROMINOS } from '../constants/tetromino'
 import { STOPPED } from '../constants/gameStatus'
 
 import './styles/InfoPanel.css'
@@ -47,10 +47,11 @@ class InfoPanel extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-
-  }
+InfoPanel.PropTypes = {
+  gameStatus: PropTypes.string,
+  linesCleared: PropTypes.number,
+  nextTetromino: PropTypes.oneOf(TETROMINOS),
+  score: PropTypes.number
 }
 
-export default connect(mapStateToProps)(InfoPanel)
+export default InfoPanel

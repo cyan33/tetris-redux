@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const GameStatusButton = ({
   onClickHandler,
@@ -8,5 +9,10 @@ const GameStatusButton = ({
     { text }
   </button>
 )
+
+GameStatusButton.PropTypes = {
+  onClickHandler: PropTypes.func,
+  text: PropTypes.string
+}
 
 export default GameStatusButton

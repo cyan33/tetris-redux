@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Well from './Well'
@@ -9,6 +10,7 @@ import {
   moveLeft, moveRight, enableAccelerate, disableAccelerate, rotate
 } from '../actions'
 import { PLAYING } from '../constants/gameStatus'
+import { TETROMINOS } from '../constants/tetromino'
 import { UP, LEFT, RIGHT, DOWN } from '../constants/options' 
 
 import './styles/TetrisGame.css'
@@ -119,6 +121,23 @@ function mapDispatchToProps(dispatch) {
     onEnableAccelerate: () => dispatch(enableAccelerate()),
     onDisableAccelerate: () => dispatch(disableAccelerate())
   }
+}
+
+TetrisGame.PropTypes = {
+  gameStatus: PropTypes.string,
+  isAccelerating: PropTypes.bool,
+  isPlaying: PropTypes.bool,
+  linesCleared: PropTypes.number,
+  nextTetromino: PropTypes.oneOf(TETROMINOS),
+  score: PropTypes.number,
+  onDisableAccelerate: PropTypes.func,
+  onEnableAccelerate: PropTypes.func,
+  onGameInit: PropTypes.func,
+  onGamePause: PropTypes.func,
+  onGameResume: PropTypes.func,
+  onMoveLeft: PropTypes.func,
+  onMoveRight: PropTypes.func,
+  onRotate: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TetrisGame)

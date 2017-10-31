@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import marked from 'marked'
 
 import WellGrid from './WellGrid'
 import Tetromino from './Tetromino'
 import Overlay from './Overlay'
-import { COLORS } from '../constants/tetromino'
+import { COLORS, TETROMINOS } from '../constants/tetromino'
 import { PLAYING } from '../constants/gameStatus'
 import { GAME_INTRO } from '../constants/options'
 
@@ -38,6 +39,17 @@ export class Well extends Component {
       </div>
     )
   }
+}
+
+Well.PropTypes = {
+  currTetroGrid: PropTypes.array,
+  currTetroPosition: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number
+  }),
+  currTetromino: PropTypes.oneOf(TETROMINOS),
+  gameStatus: PropTypes.string,
+  grid: PropTypes.array
 }
 
 function mapStateToProps(state) {

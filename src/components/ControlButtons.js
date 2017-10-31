@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import DirectionButton from './DirectionButton'
 
@@ -94,6 +95,19 @@ function mapDispatchToProps(dispatch) {
     onEnableAccelerate: () => dispatch(enableAccelerate()),
     onDisableAccelerate: () => dispatch(disableAccelerate())
   }
+}
+
+ControlButtons.PropTypes = {
+  gameStatus: PropTypes.string,
+  isPlaying: PropTypes.bool,
+  onDisableAccelerate: PropTypes.func,
+  onEnableAccelerate: PropTypes.func,
+  onGamePause: PropTypes.func,
+  onGameResume: PropTypes.func,
+  onGameStart: PropTypes.func,
+  onMoveLeft: PropTypes.func,
+  onMoveRight: PropTypes.func,
+  onRotate: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ControlButtons)
