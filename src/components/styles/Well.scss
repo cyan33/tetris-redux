@@ -40,7 +40,7 @@
   .overlay {
     position: absolute;
     top: 0;
-    height: 100%;
+    height: calc(100% - 30px);
     color: $deepest-blue;
     padding: 15px;
     line-height: 2;

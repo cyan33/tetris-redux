@@ -2,7 +2,7 @@
   position: relative;
   flex-basis: 295px;
   background-color: #e4faff; }
-  @media screen and (max-width: 380px) {
+  @media screen and (max-width: 450px) {
     .well-container {
       flex-basis: 100%; } }
   .well-container .well-grid {
@@ -26,7 +26,7 @@
   .well-container .overlay {
     position: absolute;
     top: 0;
-    bottom: 0;
+    height: calc(100% - 30px);
     color: #0d2e6d;
     padding: 15px;
     line-height: 2;
