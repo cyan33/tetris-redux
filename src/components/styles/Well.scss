@@ -4,8 +4,11 @@
 .well-container {
   position: relative;
   flex-basis: 295px;
-  @media #{$mobile-phone} {
+  @media #{$mobile-phone-6} {
     flex-basis: 100%;
+  }
+  @media #{$mobile-phone-5} {
+    flex-basis: 440px;
   }
 
   background-color: $transparent-blue;
@@ -44,6 +47,7 @@
     color: $deepest-blue;
     padding: 15px;
     line-height: 2;
+    overflow: hidden;
     background: $transparent-blue-transparent;
     a {
       text-decoration: none;

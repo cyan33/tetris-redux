@@ -2,9 +2,12 @@
   position: relative;
   flex-basis: 295px;
   background-color: #e4faff; }
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 451px) {
     .well-container {
       flex-basis: 100%; } }
+  @media screen and (max-width: 321px) {
+    .well-container {
+      flex-basis: 440px; } }
   .well-container .well-grid {
     position: relative;
     width: 100%;
@@ -30,6 +33,7 @@
     color: #0d2e6d;
     padding: 15px;
     line-height: 2;
+    overflow: hidden;
     background: rgba(228, 250, 255, 0.5); }
     .well-container .overlay a {
       text-decoration: none; }

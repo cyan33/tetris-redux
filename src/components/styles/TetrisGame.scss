@@ -26,16 +26,20 @@ button {
   top: 20px;
   width: 530px;
   height: 590px;
-  @media #{$mobile-phone} {
+  @media #{$mobile-phone-6} {
     width: 340px;
     height: 100%;
     top: 10px;
+  }
+  @media #{$mobile-phone-5} {
+    width: 260px;
+    height: 100%;
   }
 
   .tetris-container {
     display: flex;
     flex-direction: row;
-    @media #{$mobile-phone} {
+    @media #{$mobile-phone-6} {
       flex-direction: column;
       height: 550px;
     }
