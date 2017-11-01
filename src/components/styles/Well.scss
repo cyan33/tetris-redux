@@ -1,8 +1,13 @@
 @import './colors.scss';
+@import './size.scss';
 
 .well-container {
   position: relative;
   flex-basis: 295px;
+  @media #{$mobile-phone} {
+    flex-basis: 100%;
+  }
+
   background-color: $transparent-blue;
   
   .well-grid {

@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   flex: 2; }
+  .info-container:after {
+    content: " ";
+    display: block;
+    clear: both; }
   .info-container .info-title {
     text-align: center;
     padding-top: 5px;
@@ -19,6 +23,9 @@
     position: relative;
     min-height: 220px;
     background-color: #a2e2ef; }
+    @media screen and (max-width: 380px) {
+      .info-container .next-tetro {
+        display: none; } }
     .info-container .next-tetro .tetromino {
       position: absolute; }
       .info-container .next-tetro .tetromino .square-block-container {
@@ -31,6 +38,9 @@
   .info-container .score {
     min-height: 165px;
     background-color: #5fd1d7; }
+    @media screen and (max-width: 380px) {
+      .info-container .score {
+        display: none; } }
     .info-container .score .section:nth-of-type(1) {
       margin-top: 10px;
       margin-bottom: 10px; }
@@ -40,6 +50,9 @@
     .info-container .control-buttons .start-game {
       text-align: center;
       margin-top: 55px; }
+      @media screen and (max-width: 380px) {
+        .info-container .control-buttons .start-game {
+          margin-top: 10px; } }
       .info-container .control-buttons .start-game .gameStatus-btn {
         width: 70px;
         height: 30px;
@@ -60,6 +73,10 @@
     flex-direction: row;
     justify-content: center;
     margin-top: 40px; }
+    @media screen and (max-width: 380px) {
+      .info-container .directions-control {
+        margin-top: 15px;
+        padding-bottom: 10px; } }
     .info-container .directions-control .d-btn button {
       width: 38px;
       height: 38px;

@@ -2,6 +2,10 @@
   margin: 0;
   padding: 0; }
 
+html, body {
+  height: 100%;
+  overflow: auto; }
+
 ul li {
   list-style: none; }
 
@@ -9,14 +13,37 @@ button {
   outline: none;
   border: none; }
 
-.tetris-container {
-  display: flex;
+#root {
   margin: 0 auto;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
   top: 20px;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: stretch;
   width: 530px;
-  min-height: 590px; }
+  height: 590px; }
+  @media screen and (max-width: 380px) {
+    #root {
+      width: 90%;
+      height: 100%;
+      top: 10px; } }
+  #root .tetris-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    width: 100%;
+    height: 100%; }
+    @media screen and (max-width: 380px) {
+      #root .tetris-container {
+        flex-direction: column;
+        height: 550px; } }
+
+.github-fork {
+  display: block; }
+  @media screen and (max-width: 750px) {
+    .github-fork {
+      display: none; } }
+  .github-fork img {
+    position: fixed;
+    top: 0;
+    right: 0;
+    border: 0; }
