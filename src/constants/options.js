@@ -22,5 +22,5 @@ export const GAME_INTRO = `This game is a simplified
      **[source code](https://github.com/thomasyimgit/Tetris)**.
       <br /><br />Thanks to **[@Rose](https://twitter.com/luosihua)** for
        this awesome UI design, without which this wouldn't
-        come into realization.<br /><br /> Built by
-        **[@Chang](https://twitter.com/ThomasYimm)**.`
+        come to the realization.<br /><br /> Built by
+        **[@Chang](https://twitter.com/changyan33)**.`

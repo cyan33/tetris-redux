@@ -16,6 +16,7 @@
     padding-top: 5px;
     padding-bottom: 10px;
     color: #fff;
+    font-family: monospace;
     &.big {
       font-size: 33px;
     }
@@ -26,6 +27,7 @@
 
   .info-value {
     color: #fff;
+    font-family: monospace;
     text-align: center;
     font-size: 20px;
   }
@@ -109,6 +111,7 @@
       font-size: 25px;
       color: $deep-blue3;
       background-color: $light-green;
+      border-radius: 0;
       &:not(:nth-of-type(4)) {
         border-right: 1px solid $deep-blue2;
       }
