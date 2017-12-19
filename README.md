@@ -7,8 +7,6 @@
 
 This is an implementation of the famous Tetris game in browser side. Also, it's a good choice to get your hands dirty with React and Redux and their related ecosystem.
 
-I also wrote some refletions after writing the game. Click [here](https://thomasyimgit.github.io/2017/07/23/What-I-learned-During-Writing-the-Tetris-Game/) to view it.
-
 ## Features
 
 - Bootstrapped with `create-react-app`
@@ -19,14 +17,14 @@ I also wrote some refletions after writing the game. Click [here](https://thomas
 
 ## Installation
 
-Play it online at https://thomasyimgit.github.io/Tetris/
+Play it online at https://cyan.github.io/tetris/
 
 Or get the local version with full source code:
 
 clone the repo and install the dependencies:
 
 ```
-> git clone git@github.com:thomasyimgit/Tetris.git && cd ./Tetris
+> git clone git@github.com:cyan33/tetris.git && cd ./tetris
 > npm install
 ```
 
@@ -53,7 +51,7 @@ To run the test,
 ### How the Code Is Organized
 
 ```
-|src
+|-- src
   |-- __test__: unit test files
   |-- actions: redux actions
   |-- reducers: redux reducer
