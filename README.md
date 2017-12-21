@@ -1,6 +1,6 @@
 # Tetris
 
-[![Build Status](https://travis-ci.org/thomasyimgit/Tetris.svg?branch=master)](https://travis-ci.org/thomasyimgit/Tetris)
+[![Build Status](https://travis-ci.org/cyan33/tetris.svg?branch=master)](https://travis-ci.org/cyan33/tetris)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 
 ## Overview

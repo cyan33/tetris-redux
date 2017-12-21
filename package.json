@@ -14,7 +14,7 @@
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0"
   },
-  "homepage": "http://thomasyimgit.github.io/Tetris",
+  "homepage": "http://cyan33.github.io/tetris-redux",
   "devDependencies": {
     "gh-pages": "^1.0.0",
     "react-scripts": "0.9.5"
