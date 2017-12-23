@@ -55,6 +55,7 @@ export default function root(state = {}, action) {
         currTetroPosition: newPosition
       })
     case ROTATE:
+      if (currTetromino === 'O')  return state
       const newTetroGrid = rotate(currTetroGrid)
       newPosition = fitTetrominoWithinBoundaries(grid, newTetroGrid, currTetroPosition)
     
