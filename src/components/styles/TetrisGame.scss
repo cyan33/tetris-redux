@@ -7,7 +7,7 @@
 
 html, body {
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
 }
 
 ul li {
@@ -37,6 +37,7 @@ button {
   }
 
   .tetris-container {
+    overflow: hidden;
     display: flex;
     flex-direction: row;
     @media #{$mobile-phone-6} {

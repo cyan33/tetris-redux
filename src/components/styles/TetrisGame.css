@@ -4,7 +4,7 @@
 
 html, body {
   height: 100%;
-  overflow: auto; }
+  overflow: hidden; }
 
 ul li {
   list-style: none; }
@@ -30,6 +30,7 @@ button {
       width: 260px;
       height: 100%; } }
   #root .tetris-container {
+    overflow: hidden;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
